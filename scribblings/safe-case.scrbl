@@ -3,7 +3,10 @@
                      racket/base)
           safe-case
           racket/sandbox
+          racket/runtime-path
           scribble/example)
+
+@(define-runtime-path compile-error-img "../img/safe-case-compile-error.png")
 
 @title{safe-case}
 @author{Laurent Orseau}
@@ -27,7 +30,7 @@ License: MIT or Apache 2.0 at your option.
    [(a) 'a]
    [(b c) 'b-or-c])
  (code:comment "Compile-time error:")
- (code:comment "(The docs don't show it, but DrRacket highlights `a_typo` in red)")
+ (code:comment "(The docs don't render this well, see below for a DrRacket screenshot)")
  (eval:error
   (my-case 'a
     [(a_typo) 'a]
@@ -42,6 +45,9 @@ License: MIT or Apache 2.0 at your option.
   (my-case 'c
     [(a) 'a]
     [(b) 'b]))]
+
+Example of a compilation error within DrRacket:
+@image[compile-error-img]
 
 @defform[(define-safe-case caser (sym ...))]{
 Binds @racket[caser] to a form similar to @racket[case] but with tighter safety checks
